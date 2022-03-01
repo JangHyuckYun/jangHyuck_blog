@@ -6,7 +6,12 @@ const Category = ({ categories, thisCategory }) => {
     console.log("Category => categories", categories);
     return (
         <ul className="categories">
-            {categories.map(({fieldValue, totalCount}) => (<li key={fieldValue} className={fieldValue === thisCategory ? "active" : ""}>{fieldValue}({totalCount})</li>))}
+            {categories.map(({fieldValue, totalCount}) => {
+                console.log(fieldValue, totalCount);
+                return (
+                    <li key={fieldValue} className={fieldValue === thisCategory ? "active" : ""}>{fieldValue}({totalCount})</li>
+                );
+            })}
         </ul>
     );
 };
