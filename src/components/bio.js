@@ -10,25 +10,19 @@ import { useStaticQuery, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 const Bio = () => {
-  const data = useStaticQuery(graphql`
-    query BioQuery {
-      site {
-        siteMetadata {
-          author {
-            name
-            summary
-          }
-          social {
-            twitter
-          }
-        }
+  const data = {
+      author: {
+          name: "JangHyuck Yun",
+          summary: "South Korean"
+      },
+      social: {
+          instagram: "longlarge_yoon"
       }
-    }
-  `)
+  }
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
-  const author = data.site.siteMetadata?.author
-  const social = data.site.siteMetadata?.social
+  const author = data.author
+  const social = data.social
 
   return (
     <div className="bio">
@@ -36,7 +30,7 @@ const Bio = () => {
         className="bio-avatar"
         layout="fixed"
         formats={["auto", "webp", "avif"]}
-        src="../images/profile-pic.png"
+        src="../images/profile.jpg"
         width={50}
         height={50}
         quality={95}
@@ -46,8 +40,8 @@ const Bio = () => {
         <p>
           Written by <strong>{author.name}</strong> {author?.summary || null}
           {` `}
-          <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
+          <a href={`https://www.instagram.com/${social?.instagram || ``}`}>
+            You should follow them on Instagram
           </a>
         </p>
       )}
