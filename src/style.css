@@ -248,6 +248,10 @@ a:focus {
 
 /* Custom classes */
 
+.none {
+  display: none;
+}
+
 .global-wrapper {
   margin: var(--spacing-0) auto;
   max-width: var(--maxWidth-wrapper);

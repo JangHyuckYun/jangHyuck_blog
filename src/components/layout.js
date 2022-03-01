@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Link} from "gatsby";
-import "../scss/category.scss";
+import Logo from "../images/logo_blue.png";
+import "../scss/layout.scss";
 
 const Category = ({categories, thisCategory}) => {
     if (categories === undefined) {
@@ -35,16 +36,33 @@ const Layout = ({location, title, categories, thisCategory, children}) => {
         )
     } else {
         header = (
-            <Link className="header-link-home" to="/">
-                {title}
-            </Link>
+            <div>
+
+            </div>
         )
     }
 
     return (
         <div className="global-wrapper" data-is-root-path={isRootPath}>
-            <header className="global-header">{header}</header>
-            <Category categories={categories} thisCategory={thisCategory}/>
+            <input type="checkbox" name="menu-check" id="menu-check" className="none" />
+            <header className="global-header">
+                <div className="menu-icon">
+                    <label htmlFor="menu-check">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                </div>
+                <div className="logo-cover">
+                    <Link to="/" className="logo">
+                        <img src={Logo} alt="logo"/>
+                    </Link>
+                </div>
+                <div className="empty"></div>
+            </header>
+            <aside className="menu-main">
+                <Category categories={categories} thisCategory={thisCategory}/>
+            </aside>
             <main>{children}</main>
             <footer>
                 © {new Date().getFullYear()}, Built with

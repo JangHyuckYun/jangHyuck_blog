@@ -1,0 +1,119 @@
+.global-header {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+  z-index: 999;
+  background: #fff;
+  padding-top: 20px;
+  top:0;
+
+  .empty {
+    flex: 1;
+  }
+
+  .logo-cover {
+    flex: 8;
+    display: flex;
+    justify-content: center;
+    .logo {
+      display: block;
+      max-width: 200px;
+      justify-self: center;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .menu-icon {
+    flex: 1;
+    transform: scale(.5);
+    margin-left: -21px;
+    label {
+      display:flex;
+      flex-direction:column;
+      width:70px;
+      cursor:pointer;
+      span {
+        background: #828bde;
+        border-radius:10px;
+        height:7px;
+        margin: 7px 0;
+        transition: .4s  cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+        &:nth-child(1) {
+          width: 50%;
+        }
+
+        &:nth-child(2) {
+          width: 100%;
+        }
+
+        &:nth-child(3) {
+          width: 75%;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+     & {
+       width: var(--maxWidth-4xl);
+       left:50%;
+       transform: translateX(-50%);
+     }
+  }
+}
+
+input[name="menu-check"] {
+  &:checked {
+    & ~ header .menu-icon span {
+      &:nth-child(1) {
+        transform-origin:bottom;
+        transform:rotatez(45deg) translate(8px,0px);
+      }
+
+      &:nth-child(2) {
+        transform-origin:top;
+        transform:rotatez(-45deg);
+      }
+
+      &:nth-child(3) {
+        transform-origin:bottom;
+        width: 50%;
+        transform: translate(30px,-11px) rotatez(45deg);
+      }
+
+    }
+
+    & ~ .menu-main {
+      right: 0;
+    }
+  }
+}
+
+
+
+.menu-main {
+  width: 25vw;
+  height: 100%;
+  position: fixed;
+  right: -25vw;
+  top: 0;
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0, .1);
+  transition: .4s ease-out;
+  z-index: 999;
+
+  .categories {
+    list-style: none;
+
+    li.active {
+      background: red;
+    }
+  }
+}
