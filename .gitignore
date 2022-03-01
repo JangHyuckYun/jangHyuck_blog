@@ -4,6 +4,16 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.idea
+/.idea
+git_toolbox_prj.xml
+/git_toolbox_prj.xml
+runConfigurations.xml
+/runConfigurations.xml
+vcs.xml
+/vcs.xml
+workspace.xml
+/workspace.xml
 
 # Runtime data
 pids

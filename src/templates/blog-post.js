@@ -16,7 +16,7 @@ const BlogPostTemplate = ({ data, location }) => {
 
 
   return (
-    <Layout location={location} title={siteTitle} categories={categories.group} thisCategory={thisCategory}>
+    <Layout location={location} title={siteTitle} categories={categories?.group} thisCategory={thisCategory || ""}>
         <div className="blog-post-container">
             <div className="content">
                 <Seo
