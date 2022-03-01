@@ -1,11 +1,21 @@
-import * as React from "react"
-import { Link } from "gatsby"
+import * as React from "react";
+import { Link } from "gatsby";
+import "../scss/category.scss";
 
-const Layout = ({ location, title, children }) => {
-  const rootPath = `${__PATH_PREFIX__}/`
-  const isRootPath = location.pathname === rootPath
-  let header
+const Category = ({ categories, thisCategory }) => {
+    console.log("Category => categories", categories);
+    return (
+        <ul className="categories">
+            {categories.map(({fieldValue, totalCount}) => (<li key={fieldValue} className={fieldValue === thisCategory ? "active" : ""}>{fieldValue}({totalCount})</li>))}
+        </ul>
+    );
+};
 
+
+const Layout = ({ location, title, categories, thisCategory, children }) => {
+  const rootPath = `${__PATH_PREFIX__}/`;
+  const isRootPath = location.pathname === rootPath;
+  let header;
   if (isRootPath) {
     header = (
       <h1 className="main-heading">
@@ -23,6 +33,7 @@ const Layout = ({ location, title, children }) => {
   return (
     <div className="global-wrapper" data-is-root-path={isRootPath}>
       <header className="global-header">{header}</header>
+        <Category categories={categories} thisCategory={thisCategory} />
       <main>{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with

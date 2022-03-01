@@ -6,12 +6,15 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+  const siteTitle = data.site.siteMetadata?.title || `Title`;
+  const posts = data.allMarkdownRemark.nodes;
+  const { categories } = data;
+
+  console.log("categoriescategories", categories.group)
 
   if (posts.length === 0) {
     return (
-      <Layout location={location} title={siteTitle}>
+      <Layout location={location} title={siteTitle} categories={[]} thisCategory={""}>
         <Seo title="All posts" />
         <Bio />
         <p>
@@ -24,7 +27,7 @@ const BlogIndex = ({ data, location }) => {
   }
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={siteTitle} categories={categories.group}>
       <Seo title="All posts" />
       <Bio />
       <ol style={{ listStyle: `none` }}>
@@ -72,6 +75,14 @@ export const pageQuery = graphql`
         title
       }
     }
+    
+    categories: allMarkdownRemark(limit: 2000) {
+        group(field: frontmatter___category) {
+            fieldValue
+            totalCount
+        }
+    }
+    
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       nodes {
         excerpt

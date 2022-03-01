@@ -9,12 +9,14 @@ import TableOfContents from "../components/tableOfContents";
 import "../scss/tableOfContents.scss";
 
 const BlogPostTemplate = ({ data, location }) => {
-  const post = data.markdownRemark
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const { previous, next } = data
-    console.log("data", data);
+  const post = data.markdownRemark;
+  const siteTitle = data.site.siteMetadata?.title || `Title`;
+  const { previous, next, categories } = data;
+  const thisCategory = data.markdownRemark.frontmatter.category;
+
+
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={siteTitle} categories={categories.group} thisCategory={thisCategory}>
         <div className="blog-post-container">
             <div className="content">
                 <Seo
@@ -85,6 +87,7 @@ export const pageQuery = graphql`
         title
       }
     }
+
     markdownRemark(id: { eq: $id }) {
       id
       excerpt(pruneLength: 160)
@@ -92,8 +95,9 @@ export const pageQuery = graphql`
       tableOfContents
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY년 MM월 DD일")
         description
+        category
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
@@ -104,6 +108,7 @@ export const pageQuery = graphql`
         title
       }
     }
+
     next: markdownRemark(id: { eq: $nextPostId }) {
       fields {
         slug
@@ -112,5 +117,13 @@ export const pageQuery = graphql`
         title
       }
     }
+    
+    categories: allMarkdownRemark(limit: 2000) {
+        group(field: frontmatter___category) {
+            fieldValue
+            totalCount
+        }
+    }
+    
   }
-`
+`;

@@ -10,7 +10,8 @@
   }
 
   .table-of-content {
-    top: 0;
+    top:0;
+    padding-top: 50px;
     flex-grow: 0;
     max-width: calc((100% / 3) + 150px);
     flex-basis: calc(100% / 3);
