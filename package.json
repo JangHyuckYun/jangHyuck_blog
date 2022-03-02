@@ -12,6 +12,7 @@
     "gatsby-plugin-feed": "^4.8.0",
     "gatsby-plugin-gatsby-cloud": "^4.8.0",
     "gatsby-plugin-google-analytics": "^4.8.0",
+    "gatsby-plugin-graphql-codegen": "^3.1.1",
     "gatsby-plugin-image": "^2.8.0",
     "gatsby-plugin-manifest": "^4.8.0",
     "gatsby-plugin-offline": "^5.8.0",
@@ -27,12 +28,14 @@
     "gatsby-source-filesystem": "^4.8.0",
     "gatsby-transformer-remark": "^5.8.0",
     "gatsby-transformer-sharp": "^4.8.0",
+    "kebab-case": "^1.0.1",
     "prismjs": "^1.25.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "typeface-merriweather": "0.0.72",
-    "typeface-montserrat": "0.0.75"
+    "typeface-montserrat": "0.0.75",
+    "typescript": "^4.6.2"
   },
   "devDependencies": {
     "prettier": "^2.5.1"

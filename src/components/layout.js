@@ -2,6 +2,9 @@ import * as React from "react";
 import {Link} from "gatsby";
 import Logo from "../images/logo_blue.png";
 import "../scss/layout.scss";
+import Utterances from "./utterances";
+
+const kebabCase = (str) => str.split(" ").join("-").toLowerCase();
 
 const Category = ({categories, thisCategory}) => {
     if (categories === undefined) {
@@ -15,8 +18,9 @@ const Category = ({categories, thisCategory}) => {
             {categories.map(({fieldValue, totalCount}) => {
                 console.log(fieldValue, totalCount);
                 return (
-                    <li key={fieldValue}
-                        className={fieldValue === thisCategory ? "active" : ""}>{fieldValue}({totalCount})</li>
+                    <li key={fieldValue} className={fieldValue === thisCategory ? "active" : ""}>
+                        <Link to={`/categories/${kebabCase(fieldValue)}`}>{fieldValue}({totalCount})</Link>
+                    </li>
                 );
             })}
         </ul>
@@ -27,20 +31,8 @@ const Category = ({categories, thisCategory}) => {
 const Layout = ({location, title, categories, thisCategory, children}) => {
     const rootPath = `${__PATH_PREFIX__}/`;
     const isRootPath = location.pathname === rootPath;
+    const isNotIncludePathComment = isRootPath || location.pathname.includes("categories");
     let header;
-    if (isRootPath) {
-        header = (
-            <h1 className="main-heading">
-                <Link to="/">{title}</Link>
-            </h1>
-        )
-    } else {
-        header = (
-            <div>
-
-            </div>
-        )
-    }
 
     return (
         <div className="global-wrapper" data-is-root-path={isRootPath}>
@@ -62,9 +54,13 @@ const Layout = ({location, title, categories, thisCategory, children}) => {
             </header>
             <aside className="menu-main">
                 <Category categories={categories} thisCategory={thisCategory}/>
+                <label htmlFor="menu-check" className="background-cover" />
             </aside>
             <main>{children}</main>
             <footer>
+                {isNotIncludePathComment ? "" : <div className="comments">
+                    <Utterances repo='JangHyuckYun/jangHyuck_blog' theme='github-light' />
+                </div> }
                 © {new Date().getFullYear()}, Built with
                 {` `}
                 <a href="https://www.gatsbyjs.com">Gatsby</a>

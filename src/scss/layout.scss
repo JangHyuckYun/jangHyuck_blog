@@ -7,7 +7,7 @@
   z-index: 999;
   background: #fff;
   padding-top: 20px;
-  top:0;
+  top: 0;
 
   .empty {
     flex: 1;
@@ -17,10 +17,12 @@
     flex: 8;
     display: flex;
     justify-content: center;
+
     .logo {
       display: block;
       max-width: 200px;
       justify-self: center;
+
       img {
         width: 100%;
         height: 100%;
@@ -33,17 +35,19 @@
     flex: 1;
     transform: scale(.5);
     margin-left: -21px;
+
     label {
-      display:flex;
-      flex-direction:column;
-      width:70px;
-      cursor:pointer;
+      display: flex;
+      flex-direction: column;
+      width: 70px;
+      cursor: pointer;
+
       span {
         background: #828bde;
-        border-radius:10px;
-        height:7px;
+        border-radius: 10px;
+        height: 7px;
         margin: 7px 0;
-        transition: .4s  cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        transition: .4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 
         &:nth-child(1) {
           width: 50%;
@@ -61,11 +65,10 @@
   }
 
   @media screen and (max-width: 1200px) {
-     & {
-       width: var(--maxWidth-4xl);
-       left:50%;
-       transform: translateX(-50%);
-     }
+    & {
+      width: var(--maxWidth-4xl);
+      margin: 0 auto 20px auto;
+    }
   }
 }
 
@@ -73,30 +76,32 @@ input[name="menu-check"] {
   &:checked {
     & ~ header .menu-icon span {
       &:nth-child(1) {
-        transform-origin:bottom;
-        transform:rotatez(45deg) translate(8px,0px);
+        transform-origin: bottom;
+        transform: rotatez(45deg) translate(8px, 0px);
       }
 
       &:nth-child(2) {
-        transform-origin:top;
-        transform:rotatez(-45deg);
+        transform-origin: top;
+        transform: rotatez(-45deg);
       }
 
       &:nth-child(3) {
-        transform-origin:bottom;
+        transform-origin: bottom;
         width: 50%;
-        transform: translate(30px,-11px) rotatez(45deg);
+        transform: translate(30px, -11px) rotatez(45deg);
       }
 
     }
 
     & ~ .menu-main {
       right: 0;
+
+      .background-cover {
+        visibility: visible;
+      }
     }
   }
 }
-
-
 
 .menu-main {
   width: 25vw;
@@ -105,15 +110,45 @@ input[name="menu-check"] {
   right: -25vw;
   top: 0;
   background: white;
-  box-shadow: 0 0 10px rgba(0,0,0, .1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
   transition: .4s ease-out;
   z-index: 999;
+
+  .background-cover {
+    width: calc(100% - 25vw);
+    height: 100%;
+    background: none;
+    //opacity: .5;
+    position: fixed;
+    left:0;
+    top: 0;
+    visibility: hidden;
+    cursor: pointer;
+  }
 
   .categories {
     list-style: none;
 
     li.active {
-      background: red;
+      padding-left: 10px;
+      position: relative;
+
+      &:before {
+        content: "";
+        width: 5px;
+        height: 80%;
+        background: red;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+      }
     }
+  }
+}
+
+footer {
+  .utterances {
+    margin: 0;
   }
 }
