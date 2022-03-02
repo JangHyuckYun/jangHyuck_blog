@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Link} from "gatsby";
 import Logo from "../images/logo_blue.png";
-import "../scss/layout.scss";
+import "./../scss/layout.scss";
 import Utterances from "./utterances";
 
 const kebabCase = (str) => str.split(" ").join("-").toLowerCase();
