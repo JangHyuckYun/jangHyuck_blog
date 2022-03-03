@@ -1,16 +1,15 @@
-import * as React from "react"
-import { Link, graphql } from "gatsby"
+import * as React from "react";
+import { Link, graphql } from "gatsby";
 
-import Bio from "./../components/bio"
-import Layout from "./../components/layout"
-import Seo from "./../components/seo"
+import {useMemo} from "react";
+import Bio from "../components/bio";
+import Layout from "../components/layout";
+import Seo from "../components/seo";
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const posts = data.allMarkdownRemark.nodes;
   const { categories } = data;
-
-  console.log("categoriescategories", categories.group)
 
   if (posts.length === 0) {
     return (
@@ -25,6 +24,12 @@ const BlogIndex = ({ data, location }) => {
       </Layout>
     )
   }
+
+
+
+
+
+
 
   return (
     <Layout location={location} title={siteTitle} categories={categories.group}>

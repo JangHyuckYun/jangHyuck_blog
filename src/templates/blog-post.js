@@ -127,3 +127,17 @@ export const pageQuery = graphql`
     
   }
 `;
+/*
+*
+* query MyQuery {
+  allMarkdownRemark {
+    edges {
+      node {
+        frontmatter {
+          category
+        }
+      }
+    }
+  }
+}
+* */
