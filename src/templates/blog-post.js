@@ -16,7 +16,7 @@ const BlogPostTemplate = ({ data, location }) => {
 
 
   return (
-    <Layout location={location} title={siteTitle} categories={categories?.group} thisCategory={thisCategory || ""}>
+    <Layout location={location} title={siteTitle} categories={categories?.group} thisCategory={thisCategory || ""} tableOfContents={data.markdownRemark.tableOfContents}>
         <div className="blog-post-container">
             <div className="content">
                 <Seo
@@ -68,7 +68,6 @@ const BlogPostTemplate = ({ data, location }) => {
                     </ul>
                 </nav>
             </div>
-            <TableOfContents content={data.markdownRemark.tableOfContents} />
         </div>
     </Layout>
   )

@@ -3,6 +3,7 @@ import {Link} from "gatsby";
 import Logo from "../images/logo_blue.png";
 import "../scss/layout.scss";
 import Utterances from "./utterances";
+import TableOfContents from "./tableOfContents";
 
 const kebabCase = (str) => str.split(" ").join("-").toLowerCase();
 
@@ -81,45 +82,55 @@ const Category = ({categories, thisCategory}) => {
 };
 
 
-const Layout = ({location, title, categories, thisCategory, children}) => {
+const Layout = ({location, title, categories, thisCategory, children, tableOfContents}) => {
     const rootPath = `${__PATH_PREFIX__}/`;
     const isRootPath = location.pathname === rootPath;
     const isNotIncludePathComment = isRootPath || location.pathname.includes("categories");
-
+    console.log("tableOfContents", tableOfContents)
     return (
-        <div className="global-wrapper" data-is-root-path={isRootPath}>
-            <input type="checkbox" name="menu-check" id="menu-check" className="none" />
-            <header className="global-header">
-                <div className="menu-icon mobile">
-                    <label htmlFor="menu-check">
-                        <span />
-                        <span />
-                        <span />
-                    </label>
-                </div>
-                <div className="logo-cover">
-                    <Link to="/" className="logo">
-                        <img src={Logo} alt="logo"/>
-                    </Link>
-                </div>
-                <div className="empty mobile" />
-            </header>
-            <aside className="menu-main mobile">
+        <div className="global-container">
+            <aside className="global-left">
                 <Category categories={categories} thisCategory={thisCategory}/>
-                <label htmlFor="menu-check" className="background-cover" />
             </aside>
-            <aside className="main-category pc">
+            <div className="global-center">
+                <div className="global-wrapper" data-is-root-path={isRootPath}>
+                    <input type="checkbox" name="menu-check" id="menu-check" className="none" />
+                    <header className="global-header">
+                        <div className="menu-icon mobile">
+                            <label htmlFor="menu-check">
+                                <span />
+                                <span />
+                                <span />
+                            </label>
+                        </div>
+                        <div className="logo-cover">
+                            <Link to="/" className="logo">
+                                <img src={Logo} alt="logo"/>
+                            </Link>
+                        </div>
+                        <div className="empty mobile" />
+                    </header>
+                    <aside className="menu-main mobile">
+                        <Category categories={categories} thisCategory={thisCategory}/>
+                        <label htmlFor="menu-check" className="background-cover" />
+                    </aside>
+                    <aside className="main-category pc">
 
+                    </aside>
+                    <main>{children}</main>
+                    <footer>
+                        {isNotIncludePathComment ? "" : <div className="comments">
+                            <Utterances repo='JangHyuckYun/jangHyuck_blog' theme='github-light' />
+                        </div> }
+                        © {new Date().getFullYear()}, Built with
+                        {` `}
+                        <a href="https://www.gatsbyjs.com">Gatsby</a>
+                    </footer>
+                </div>
+            </div>
+            <aside className="global-right">
+                <TableOfContents content={tableOfContents} />
             </aside>
-            <main>{children}</main>
-            <footer>
-                {isNotIncludePathComment ? "" : <div className="comments">
-                    <Utterances repo='JangHyuckYun/jangHyuck_blog' theme='github-light' />
-                </div> }
-                © {new Date().getFullYear()}, Built with
-                {` `}
-                <a href="https://www.gatsbyjs.com">Gatsby</a>
-            </footer>
         </div>
     )
 }

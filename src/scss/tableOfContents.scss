@@ -1,12 +1,12 @@
 .blog-post-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 
   .content {
     flex-grow: 0;
-    max-width: calc(100% * 2 / 3);
-    flex-basis: calc(100% * 2 / 3);
+    max-width: calc((100% * 2 / 3) + 14%);
+    flex-basis: calc((100% * 2 / 3) + 14%);
   }
 
   .table-of-content {

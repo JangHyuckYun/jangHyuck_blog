@@ -17,6 +17,7 @@
   --maxWidth-4xl: 56rem;
   --maxWidth-5xl: 62rem;
   --maxWidth-6xl: 68rem;
+  --maxWidth-7xl: 74rem;
   --maxWidth-full: "100%";
   --maxWidth-wrapper: var(--maxWidth-6xl);
   --spacing-px: "1px";
@@ -250,6 +251,38 @@ a:focus {
 
 .none {
   display: none;
+}
+
+.global-container {
+  display: flex;
+  justify-content: center;
+  margin: var(--spacing-0) auto;
+  max-width: var(--maxWidth-wrapper);
+  padding: var(--spacing-10) var(--spacing-5);
+  position: relative;
+}
+
+.global-container > .global-left,
+.global-container > .global-right {
+  flex:1;
+  height: 100%;
+  position: sticky;
+  top:-100px;
+  padding-top: 23%;
+}
+
+.global-container > .global-left .categories {
+  position: sticky;
+  top:0;
+}
+
+.global-container > .global-center {
+  flex:9;
+}
+.global-container > .global-right
+{
+  flex:1;
+  right: 0;
 }
 
 .global-wrapper {

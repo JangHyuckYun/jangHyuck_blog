@@ -71,7 +71,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const categoriesTemplate = path.resolve('src/templates/category.tsx');
   const categories = result.data.categoriesGroup.group;
-
+  console.log("categoriescategories", categories);
   categories.forEach(category => {
     createPage({
       path: `/categories/${kebabCase(category.fieldValue)}`,
