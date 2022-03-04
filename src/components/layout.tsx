@@ -4,9 +4,9 @@ import Logo from "../images/logo_blue.png";
 import "../scss/layout.scss";
 import Utterances from "./utterances";
 
-const kebabCase = (str) => str.split(" ").join("-").toLowerCase();
+const kebabCase = (str: string) => str.split(" ").join("-").toLowerCase();
 
-const Category = ({categories, thisCategory}) => {
+const Category = ({categories, thisCategory}: any) => {
     if (categories === undefined) {
         return (
             <ul className="categories">
@@ -15,7 +15,7 @@ const Category = ({categories, thisCategory}) => {
     }
     return (
         <ul className="categories">
-            {categories.map(({fieldValue, totalCount}) => {
+            {categories.map(({fieldValue, totalCount}: any) => {
                 console.log(fieldValue, totalCount);
                 return (
                     <li key={fieldValue} className={fieldValue === thisCategory ? "active" : ""}>
@@ -28,7 +28,7 @@ const Category = ({categories, thisCategory}) => {
 };
 
 
-const Layout = ({location, title, categories, thisCategory, children}) => {
+const Layout = ({location, title, categories, thisCategory, children}: any) => {
     const rootPath = `${__PATH_PREFIX__}/`;
     const isRootPath = location.pathname === rootPath;
     const isNotIncludePathComment = isRootPath || location.pathname.includes("categories");
@@ -68,4 +68,4 @@ const Layout = ({location, title, categories, thisCategory, children}) => {
     )
 }
 
-export default Layout
+export default Layout;

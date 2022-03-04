@@ -1,6 +1,6 @@
 import {graphql, Link, PageProps} from "gatsby"
 import * as React from "react"
-import Layout from "../components/Layout"
+import Layout from "../components/layout"
 import SEO from "../components/seo"
 import {CategoryQuery, Frontmatter} from "../../graphql-types"
 

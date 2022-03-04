@@ -1,5 +1,5 @@
 // import {Link, PageProps} from "gatsby";
-import Layout from "./../components/Layout";
+import Layout from "../components/layout"
 
 import { graphql, Link } from "gatsby"
 import {PageProps} from "gatsby";
