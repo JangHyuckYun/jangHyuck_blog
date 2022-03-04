@@ -1,7 +1,9 @@
 ---
 title: My Second Post!
 date: "2015-05-06T23:46:37.121Z"
-category: "test2"
+category: "Programming/test/test1-1"
+description: ""
+featuredImage: ""
 ---
 
 Wow! I love blogging so much already.

@@ -1,7 +1,8 @@
 ---
 title: 블로그를 만드는 방법
 date: "2019-08-01T23:46:37.121Z"
-category: "test"
+category: "Programming/test"
+featuredImage: ""
 ---
 
 ### 요로코롬
