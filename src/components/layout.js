@@ -44,6 +44,9 @@ const Category = ({categories, thisCategory}) => {
                 const categoryPath = [...categoryArr].slice(0, dIdx + 1).join("/");
                 subTarget.subCategory.push({ fieldValue:category, totalCount, subCategory:[], categoryPath });
             } else {
+                if(dIdx !== 0) {
+                    mainTarget.totalCount += 1;
+                }
                 subTarget.totalCount += 1;
             }
 
@@ -82,13 +85,13 @@ const Category = ({categories, thisCategory}) => {
 };
 
 
-const Layout = ({location, title, categories, thisCategory, children, tableOfContents}) => {
+const Layout = ({location, title, categories, thisCategory, children, tableOfContents, isAllPosts}) => {
     const rootPath = `${__PATH_PREFIX__}/`;
     const isRootPath = location.pathname === rootPath;
     const isNotIncludePathComment = isRootPath || location.pathname.includes("categories");
     console.log("tableOfContents", tableOfContents)
     return (
-        <div className="global-container">
+        <div className={(isAllPosts ? "global-posts global-container" : "global-container") }>
             <aside className="global-left">
                 <Category categories={categories} thisCategory={thisCategory}/>
             </aside>

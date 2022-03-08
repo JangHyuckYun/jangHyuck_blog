@@ -2,7 +2,7 @@
 title: 블로그를 만드는 방법
 date: "2019-08-01T23:46:37.121Z"
 category: "Programming/test"
-featuredImage: ""
+featuredImage: ./images/asd.png
 ---
 
 ### 요로코롬

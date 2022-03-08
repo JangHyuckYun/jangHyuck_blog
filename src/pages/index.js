@@ -6,11 +6,21 @@ import Bio from "../components/bio";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 import { StaticImage } from "gatsby-plugin-image"
+import PostItem from "../templates/postItem";
+import Masonry from "react-masonry-css";
 
 const BlogIndex = ({data, location}) => {
     const siteTitle = data.site.siteMetadata?.title || `Title`;
     const posts = data.allMarkdownRemark.nodes;
     const {categories} = data;
+
+    posts.forEach(({frontmatter}) => {
+        console.log(frontmatter.featuredImage?.childImageSharp.fluid.src);
+        if(frontmatter.featuredImage !== null) {
+            // console.log(frontmatter.featuredImage?.childImageSharp.fluid.src);
+        }
+    })
+
     if (posts.length === 0) {
         return (
             <Layout location={location} title={siteTitle} categories={[]} thisCategory={""}>
@@ -25,55 +35,27 @@ const BlogIndex = ({data, location}) => {
         )
     }
 
+    const breakpointCols = {
+        default: 4,
+        1250: 3,
+        1000: 2,
+        650: 1
+    }
+
     return (
-        <Layout location={location} title={siteTitle} categories={categories.group}>
+        <Layout location={location} title={siteTitle} categories={categories.group} isAllPosts={true}>
             <Seo title="All posts"/>
             <Bio/>
-            <ol style={{listStyle: `none`}}>
-                {posts.map(post => {
-                    const title = post.frontmatter.title || post.fields.slug
-                    // const image = post.frontmatter.featuredImage;
-                    // console.log(post.frontmatter);
-                    // console.log("image", image, image.length);
+            <Masonry
+                breakpointCols={breakpointCols}
+                className="all-posts"
+                columnClassName="post-item"
+            >
+                {posts.map(post => <PostItem post={post} />  )}
+            </Masonry>
+            {/*<ol style={{listStyle: `none`}} className={"all-posts "}>*/}
 
-                    return (
-                        <li key={post.fields.slug}>
-                            <article
-                                className="post-list-item"
-                                itemScope
-                                itemType="http://schema.org/Article" >
-
-                                <header>
-                                    {/*{image.length === 0 ? "" : (*/}
-                                    {/*    <StaticImage*/}
-                                    {/*        src={post.frontmatter.featuredImage}*/}
-                                    {/*        formats={["auto", "webp", "avif"]}*/}
-                                    {/*        width={50}*/}
-                                    {/*        height={50}*/}
-                                    {/*        quality={100}*/}
-                                    {/*        alt="Profile picture"*/}
-                                    {/*    />*/}
-                                    {/*)}*/}
-                                    <h2>
-                                        <Link to={post.fields.slug} itemProp="url">
-                                            <span itemProp="headline">{title}</span>
-                                        </Link>
-                                    </h2>
-                                    <small>{post.frontmatter.date}</small>
-                                </header>
-                                <section>
-                                    <p
-                                        dangerouslySetInnerHTML={{
-                                            __html: post.frontmatter.description || post.excerpt,
-                                        }}
-                                        itemProp="description"
-                                    />
-                                </section>
-                            </article>
-                        </li>
-                    )
-                })}
-            </ol>
+            {/*</ol>*/}
         </Layout>
     )
 }
@@ -105,6 +87,13 @@ export const pageQuery = graphql`
                     date(formatString: "YYYY년 MM월 DD일")
                     title
                     description
+                    featuredImage {
+                        childImageSharp {
+                            fluid(maxWidth: 800) {
+                                ...GatsbyImageSharpFluid
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -149,9 +149,75 @@ input[name="menu-check"] {
   }
 }
 
+$index-item-max-width: 300px;
+$index-item-max-height: 170px;
 main {
   position: relative;
   padding-top: 15%;
+
+  .all-posts {
+    list-style: none;
+    display: flex;
+
+    .post-item {
+      max-width: $index-item-max-width;
+      box-sizing: border-box;
+
+      div {
+        margin: 10px;
+        padding: 7px;
+        transition: box-shadow .3s ease-in-out, transform .3s ease-in-out;
+
+        &:hover {
+          transform: translateY(-10px);
+        }
+
+        a {
+          display: block;
+          text-decoration: none;
+
+          &.no-image {
+
+            section {
+              height: 288px;
+            }
+          }
+
+
+          .description {
+            font-size: 12px;
+            margin-bottom: 5px;
+          }
+
+          .date {
+            font-size: 12px;
+          }
+
+          section {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 7px 6px rgba(0,0,0, .1);
+            padding:10px;
+
+            transform: translateY(-7px);
+            h5 {
+              margin:5px 0 20px 0;
+            }
+
+          }
+        }
+
+      }
+
+
+    }
+
+    img {
+      max-width: 100%;
+      height: $index-item-max-height;
+      object-fit: cover;
+    }
+  }
 }
 
 footer {
