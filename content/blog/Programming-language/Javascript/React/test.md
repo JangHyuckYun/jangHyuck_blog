@@ -2,8 +2,8 @@
 title: TestTest
 date: "2015-05-01T22:12:03.284Z"
 description: "React description"
-category: "React"
-featuredImage: ""
+category: "Programming/React"
+featuredImage: ./images/cleanUp/Untitled.png
 ---
 
 # Hello
