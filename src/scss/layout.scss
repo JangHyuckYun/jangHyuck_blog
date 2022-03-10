@@ -179,7 +179,8 @@ main {
           &.no-image {
 
             section {
-              height: 288px;
+              min-height: 120px;
+              height: auto;
             }
           }
 

@@ -69,15 +69,28 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // create category page
 
-  const categoriesTemplate = path.resolve('src/templates/category.tsx');
-  const categories = result.data.categoriesGroup.group;
-  console.log("categoriescategories", categories);
+  const categoriesTemplate = path.resolve('src/pages/category.tsx');
+  let categories = result.data.categoriesGroup.group?.slice().reduce((acc, {fieldValue, totalCount}) => {
+    let urlSplit = fieldValue.split("/");
+
+    let addUrl = "";
+    urlSplit.forEach((url, idx) => {
+      addUrl += (idx !== 0 ? "/"+url : url);
+
+      if(acc.findIndex(ac => ac.fieldValue === addUrl) === -1) {
+        acc.push({ fieldValue:addUrl });
+      }
+    })
+
+    return acc;
+  }, []);
+
   categories.forEach(category => {
     createPage({
-      path: `/categories/${kebabCase(category.fieldValue)}`,
+      path: `/category/${kebabCase(category.fieldValue)}`,
       component: categoriesTemplate,
       context: {
-        category: category.fieldValue,
+        category: `/${category.fieldValue}/`,
       }
     });
   })

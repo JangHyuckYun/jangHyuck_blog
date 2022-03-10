@@ -2,12 +2,12 @@ import {Link} from "gatsby";
 import React from "react";
 
 const PostItem = ({ post }) => {
-    console.log("post", post);
+
     const title = post.frontmatter.title || post.fields.slug
-    const titleSrc = post.frontmatter.featuredImage?.childImageSharp.fluid.src;
+    const titleSrc = post.frontmatter.featuredImage?.childImageSharp?.gatsbyImageData.images.fallback.src;
 
     return (
-        <div key={post.fields.slug}>
+        <div key={title}>
             <Link
                 to={post.fields.slug}
                 className={"post-list-item " + (titleSrc ? "" : "no-image")}

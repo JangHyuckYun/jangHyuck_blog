@@ -22,12 +22,13 @@ const Category = ({categories, thisCategory}) => {
     // => [ { fieldValue: "category", totalCount:2, subCategory: [ { fieldValue: "subCategory", totalCount: 2, subCategory:[] } ]  } ]
     // 으로 변환되게 만들었음.
     // 아직 변수명을 잘 못지어서 고심 끝에 짓긴 하였지만 이상할 수 있음.
+    console.log(categories);
     const refineCategoies = categories.reduce((acc, { fieldValue, totalCount }, idx) => {
         const fFirstObjIdx = (value) => acc.findIndex((data, dIdx) => data.fieldValue !== undefined && data.fieldValue === value);
         const categoryArr = fieldValue.split("/");
 
         if(fFirstObjIdx(categoryArr[0]) === -1) {
-            acc.push({ fieldValue:categoryArr[0], totalCount, subCategory: [], categoryPath:fieldValue });
+            acc.push({ fieldValue:categoryArr[0], totalCount:(categoryArr.length <= 1 ? totalCount : 0), subCategory: [], categoryPath:categoryArr[0] });
         }
 
         let mainTarget = acc[fFirstObjIdx(categoryArr[0])];
@@ -44,11 +45,10 @@ const Category = ({categories, thisCategory}) => {
                 const categoryPath = [...categoryArr].slice(0, dIdx + 1).join("/");
                 subTarget.subCategory.push({ fieldValue:category, totalCount, subCategory:[], categoryPath });
             } else {
-                if(dIdx !== 0) {
-                    mainTarget.totalCount += 1;
-                }
                 subTarget.totalCount += 1;
             }
+
+            mainTarget.totalCount += 1;
 
             // subTarget을 해당 카테고리의 서브 카테고리 값으로 변경
             subTarget = subTarget.subCategory[subTargetIdx];
@@ -64,7 +64,7 @@ const Category = ({categories, thisCategory}) => {
             <ul className="subCategory" data-depth={depth}>
                 {subCategoryArr.map(({fieldValue, totalCount, subCategory, categoryPath}, cIdx) =>
                     (<li key={fieldValue}>
-                        <Link to={"/categories/"+kebabCase(categoryPath)}>{fieldValue} ({totalCount})</Link>
+                        <Link to={"/category/"+kebabCase(categoryPath)}>{fieldValue} ({totalCount})</Link>
                         {subCategoryTag(subCategory, depth + 1)}
                     </li>))}
             </ul>);
@@ -75,7 +75,7 @@ const Category = ({categories, thisCategory}) => {
             {refineCategoies.map(({fieldValue, totalCount, subCategory}) => {
                 return (
                     <li key={fieldValue} className={fieldValue === thisCategory ? "active" : ""}>
-                        <Link to={`/categories/${kebabCase(fieldValue)}`}>{fieldValue}({totalCount})</Link>
+                        <Link to={`/category/${kebabCase(fieldValue)}`}>{fieldValue}({totalCount})</Link>
                         {subCategoryTag(subCategory)}
                     </li>
                 );
@@ -88,8 +88,8 @@ const Category = ({categories, thisCategory}) => {
 const Layout = ({location, title, categories, thisCategory, children, tableOfContents, isAllPosts}) => {
     const rootPath = `${__PATH_PREFIX__}/`;
     const isRootPath = location.pathname === rootPath;
-    const isNotIncludePathComment = isRootPath || location.pathname.includes("categories");
-    console.log("tableOfContents", tableOfContents)
+    const isNotIncludePathComment = isRootPath || location.pathname.includes("category");
+
     return (
         <div className={(isAllPosts ? "global-posts global-container" : "global-container") }>
             <aside className="global-left">

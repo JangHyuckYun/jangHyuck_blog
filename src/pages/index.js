@@ -15,7 +15,7 @@ const BlogIndex = ({data, location}) => {
     const {categories} = data;
 
     posts.forEach(({frontmatter}) => {
-        console.log(frontmatter.featuredImage?.childImageSharp.fluid.src);
+        console.log(frontmatter.featuredImage?.childImageSharp?.gatsbyImageData.src);
         if(frontmatter.featuredImage !== null) {
             // console.log(frontmatter.featuredImage?.childImageSharp.fluid.src);
         }
@@ -62,40 +62,35 @@ const BlogIndex = ({data, location}) => {
 
 export default BlogIndex
 
-export const pageQuery = graphql`
-    query {
-        site {
-            siteMetadata {
-                title
-            }
-        }
-
-        categories: allMarkdownRemark(limit: 2000) {
-            group(field: frontmatter___category) {
-                fieldValue
-                totalCount
-            }
-        }
-
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-            nodes {
-                excerpt
-                fields {
-                    slug
-                }
-                frontmatter {
-                    date(formatString: "YYYY년 MM월 DD일")
-                    title
-                    description
-                    featuredImage {
-                        childImageSharp {
-                            fluid(maxWidth: 800) {
-                                ...GatsbyImageSharpFluid
-                            }
-                        }
-                    }
-                }
-            }
-        }
+export const pageQuery = graphql`{
+  site {
+    siteMetadata {
+      title
     }
+  }
+  categories: allMarkdownRemark(limit: 2000) {
+    group(field: frontmatter___category) {
+      fieldValue
+      totalCount
+    }
+  }
+  allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+    nodes {
+      excerpt
+      fields {
+        slug
+      }
+      frontmatter {
+        date(formatString: "YYYY년 MM월 DD일")
+        title
+        description
+        featuredImage {
+          childImageSharp {
+            gatsbyImageData(width: 800, layout: CONSTRAINED)
+          }
+        }
+      }
+    }
+  }
+}
 `

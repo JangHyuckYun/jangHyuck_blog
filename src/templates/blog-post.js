@@ -77,63 +77,52 @@ const BlogPostTemplate = ({data, location}) => {
 
 export default BlogPostTemplate
 
-export const pageQuery = graphql`
-    query BlogPostBySlug(
-        $id: String!
-        $previousPostId: String
-        $nextPostId: String
-    ) {
-        site {
-            siteMetadata {
-                title
-            }
-        }
-
-        markdownRemark(id: { eq: $id }) {
-            id
-            excerpt(pruneLength: 160)
-            html
-            tableOfContents
-            frontmatter {
-                title
-                date(formatString: "YYYY년 MM월 DD일")
-                description
-                category
-                featuredImage {
-                    childImageSharp {
-                        fluid(maxWidth: 800) {
-                            ...GatsbyImageSharpFluid
-                        }
-                    }
-                }
-            }
-        }
-        previous: markdownRemark(id: { eq: $previousPostId }) {
-            fields {
-                slug
-            }
-            frontmatter {
-                title
-            }
-        }
-
-        next: markdownRemark(id: { eq: $nextPostId }) {
-            fields {
-                slug
-            }
-            frontmatter {
-                title
-            }
-        }
-
-        categories: allMarkdownRemark(limit: 2000) {
-            group(field: frontmatter___category) {
-                fieldValue
-                totalCount
-            }
-        }
-
+export const pageQuery = graphql`query BlogPostBySlug($id: String!, $previousPostId: String, $nextPostId: String) {
+  site {
+    siteMetadata {
+      title
     }
+  }
+  markdownRemark(id: {eq: $id}) {
+    id
+    excerpt(pruneLength: 160)
+    html
+    tableOfContents
+    frontmatter {
+      title
+      date(formatString: "YYYY년 MM월 DD일")
+      description
+      category
+      featuredImage {
+        childImageSharp {
+          gatsbyImageData(width: 800, layout: CONSTRAINED)
+        }
+      }
+    }
+  }
+  previous: markdownRemark(id: {eq: $previousPostId}) {
+    fields {
+      slug
+    }
+    frontmatter {
+      title
+    }
+  }
+  next: markdownRemark(id: {eq: $nextPostId}) {
+    fields {
+      slug
+    }
+    frontmatter {
+      title
+    }
+  }
+  categories: allMarkdownRemark(limit: 2000) {
+    group(field: frontmatter___category) {
+      fieldValue
+      totalCount
+    }
+  }
+}
 `;
 /*
 *
