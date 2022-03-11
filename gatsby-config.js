@@ -12,6 +12,14 @@ module.exports = {
     },
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-gtag`,
+      options: {
+        trackingId: `G-SQJRT5XWLX`,
+        head: false,
+        anonymize: true,
+      }
+    },
     `gatsby-plugin-image`,
     // `gatsby-plugin-graphql-codegen`,
     {
