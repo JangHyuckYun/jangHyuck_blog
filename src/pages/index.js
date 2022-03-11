@@ -16,6 +16,7 @@ const BlogIndex = ({data, location}) => {
 
     posts.forEach(({frontmatter}) => {
         console.log(frontmatter.featuredImage?.childImageSharp?.gatsbyImageData.src);
+
         if(frontmatter.featuredImage !== null) {
             // console.log(frontmatter.featuredImage?.childImageSharp.fluid.src);
         }
@@ -45,7 +46,6 @@ const BlogIndex = ({data, location}) => {
     return (
         <Layout location={location} title={siteTitle} categories={categories.group} isAllPosts={true}>
             <Seo title="All posts"/>
-            <Bio/>
             <Masonry
                 breakpointCols={breakpointCols}
                 className="all-posts"

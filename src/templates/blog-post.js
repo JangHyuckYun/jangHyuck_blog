@@ -4,6 +4,7 @@ import {Link, graphql} from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import "../scss/blog-post.scss"
 
 import TableOfContents from "../components/tableOfContents";
 import "../scss/tableOfContents.scss";
@@ -39,9 +40,6 @@ const BlogPostTemplate = ({data, location}) => {
                             itemProp="articleBody"
                         />
                         <hr/>
-                        <footer>
-                            <Bio/>
-                        </footer>
                     </article>
                     <nav className="blog-post-nav">
                         <ul
