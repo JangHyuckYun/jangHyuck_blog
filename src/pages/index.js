@@ -40,7 +40,7 @@ const BlogIndex = ({data, location}) => {
         default: 4,
         1250: 3,
         1000: 2,
-        650: 1
+        670: 1
     }
 
     return (
@@ -81,7 +81,7 @@ export const pageQuery = graphql`{
         slug
       }
       frontmatter {
-        date(formatString: "YYYY년 MM월 DD일")
+        date(formatString: "YYYY.MM.DD  ")
         title
         description
         featuredImage {

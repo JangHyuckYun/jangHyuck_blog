@@ -1,11 +1,11 @@
 import React from "react";
 import {Link} from "gatsby";
-import Logo from "../images/logo_blue.png";
+import Logo from "../images/logo4-removebg.png";
 import "../scss/layout.scss";
 import Utterances from "./utterances";
 import TableOfContents from "./tableOfContents";
-import { GoMarkGithub } from "react-icons/go";
-import { FaInstagramSquare } from "react-icons/fa";
+import {GoMarkGithub} from "react-icons/go";
+import {FaInstagramSquare} from "react-icons/fa";
 
 const kebabCase = (str) => str.split(" ").join("-").toLowerCase();
 
@@ -24,27 +24,32 @@ const Category = ({categories, thisCategory}) => {
     // => [ { fieldValue: "category", totalCount:2, subCategory: [ { fieldValue: "subCategory", totalCount: 2, subCategory:[] } ]  } ]
     // 으로 변환되게 만들었음.
     // 아직 변수명을 잘 못지어서 고심 끝에 짓긴 하였지만 이상할 수 있음
-    const refineCategoies = categories.reduce((acc, { fieldValue, totalCount }, idx) => {
+    const refineCategoies = categories.reduce((acc, {fieldValue, totalCount}, idx) => {
         const fFirstObjIdx = (value) => acc.findIndex((data, dIdx) => data.fieldValue !== undefined && data.fieldValue === value);
         const categoryArr = fieldValue.split("/");
 
-        if(fFirstObjIdx(categoryArr[0]) === -1) {
-            acc.push({ fieldValue:categoryArr[0], totalCount:(categoryArr.length <= 1 ? totalCount : 0), subCategory: [], categoryPath:categoryArr[0] });
+        if (fFirstObjIdx(categoryArr[0]) === -1) {
+            acc.push({
+                fieldValue: categoryArr[0],
+                totalCount: (categoryArr.length <= 1 ? totalCount : 0),
+                subCategory: [],
+                categoryPath: categoryArr[0]
+            });
         }
 
         let mainTarget = acc[fFirstObjIdx(categoryArr[0])];
         let subTarget = mainTarget;
         categoryArr.forEach((category, dIdx) => {
             // 0번째는 이미 mainTarget에 있으므로 0번째는 넘김.
-            if(dIdx === 0) return true;
+            if (dIdx === 0) return true;
 
             let subTargetIdx = subTarget?.subCategory.findIndex((d) => d.fieldValue !== undefined && d.fieldValue === category) || -1;
 
             // subTarget에 해당 카테고리가 없으면 새로 생성
             // 해당 카테고리가 있으면 totalCount 1씩 증가
-            if(subTargetIdx === -1) {
+            if (subTargetIdx === -1) {
                 const categoryPath = [...categoryArr].slice(0, dIdx + 1).join("/");
-                subTarget.subCategory.push({ fieldValue:category, totalCount, subCategory:[], categoryPath });
+                subTarget.subCategory.push({fieldValue: category, totalCount, subCategory: [], categoryPath});
 
                 subTargetIdx = 0;
             } else {
@@ -61,13 +66,13 @@ const Category = ({categories, thisCategory}) => {
     }, []);
 
     const subCategoryTag = (subCategoryArr = [], depth = 1) => {
-        if(subCategoryArr.length === 0) return "";
+        if (subCategoryArr.length === 0) return "";
 
         return (
             <ul className="subCategory" data-depth={depth}>
                 {subCategoryArr.map(({fieldValue, totalCount, subCategory, categoryPath}, cIdx) =>
                     (<li key={fieldValue}>
-                        <Link to={"/category/"+kebabCase(categoryPath)}>{fieldValue} ({totalCount})</Link>
+                        <Link to={"/category/" + kebabCase(categoryPath)}>{fieldValue} ({totalCount})</Link>
                         {subCategoryTag(subCategory, depth + 1)}
                     </li>))}
             </ul>);
@@ -95,31 +100,35 @@ const Layout = ({location, title, categories, thisCategory, children, tableOfCon
 
     return (
         <>
-            <div className={(isAllPosts ? "global-posts global-container" : "global-container") }>
+            {isAllPosts ? (
+                <div className={"blob"}>
+
+                </div>
+            ) : ""}
+            <div className={(isAllPosts ? "global-posts global-container" : "global-container")}>
                 <aside className="global-left">
                     {isAllPosts ? "" : <Category categories={categories} thisCategory={thisCategory}/>}
                 </aside>
                 <div className="global-center">
                     <div className="global-wrapper" data-is-root-path={isRootPath}>
-                        <input type="checkbox" name="menu-check" id="menu-check" className="none" />
+                        <input type="checkbox" name="menu-check" id="menu-check" className="none"/>
                         <header className="global-header">
-                            <div className="menu-icon mobile">
-                                <label htmlFor="menu-check">
-                                    <span />
-                                    <span />
-                                    <span />
-                                </label>
-                            </div>
                             <div className="logo-cover">
                                 <Link to="/" className="logo">
                                     <img src={Logo} alt="logo"/>
                                 </Link>
                             </div>
-                            <div className="empty mobile" />
+                            <div className="menu-icon mobile">
+                                <label htmlFor="menu-check">
+                                    <span/>
+                                    <span/>
+                                    <span/>
+                                </label>
+                            </div>
                         </header>
                         <aside className="menu-main mobile">
                             <Category categories={categories} thisCategory={thisCategory}/>
-                            <label htmlFor="menu-check" className="background-cover" />
+                            <label htmlFor="menu-check" className="background-cover"/>
                         </aside>
                         <aside className="main-category pc">
 
@@ -127,32 +136,32 @@ const Layout = ({location, title, categories, thisCategory, children, tableOfCon
                         <main>{children}</main>
                         <footer>
                             {isNotIncludePathComment ? "" : <div className="comments">
-                                <Utterances repo='JangHyuckYun/jangHyuck_blog' theme='github-light' />
-                            </div> }
+                                <Utterances repo='JangHyuckYun/jangHyuck_blog' theme='github-light'/>
+                            </div>}
                         </footer>
                     </div>
                 </div>
                 <aside className="global-right">
-                    <TableOfContents content={tableOfContents} />
+                    <TableOfContents content={tableOfContents}/>
                 </aside>
             </div>
             <footer className="main-footer">
-               <div className="footer-container">
-                   <p>JangHyuck`s Blog</p>
-                   <p>
-                       © {new Date().getFullYear()}, Built with
-                       {` `}
-                       <a href="https://www.gatsbyjs.com">Gatsby</a>
-                   </p>
-                   <div className="icons">
-                       <Link to="https://github.com/JangHyuckYun" target="_blank">
-                           <GoMarkGithub />
-                       </Link>
-                       <Link to="https://www.instagram.com/longlarge_yoon/" target="_blank">
-                           <FaInstagramSquare />
-                       </Link>
-                   </div>
-               </div>
+                <div className="footer-container">
+                    <p>JangHyuck`s Blog</p>
+                    <p>
+                        © {new Date().getFullYear()}, Built with
+                        {` `}
+                        <a href="https://www.gatsbyjs.com">Gatsby</a>
+                    </p>
+                    <div className="icons">
+                        <Link to="https://github.com/JangHyuckYun" target="_blank">
+                            <GoMarkGithub/>
+                        </Link>
+                        <Link to="https://www.instagram.com/longlarge_yoon/" target="_blank">
+                            <FaInstagramSquare/>
+                        </Link>
+                    </div>
+                </div>
             </footer>
         </>
     )

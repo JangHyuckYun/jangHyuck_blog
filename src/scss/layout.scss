@@ -1,3 +1,88 @@
+.blob {
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: #023F92;
+  width: 50vmax;
+  z-index: 10;
+  animation: move 10s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes move {
+  0%   { transform: scale(1)   translate(10px, -30px); }
+  38%  { transform: scale(0.8, 1) translate(80vw, 30vh) rotate(160deg); }
+  40%  { transform: scale(0.8, 1) translate(80vw, 30vh) rotate(160deg); }
+  78%  { transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg); }
+  80%  { transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg); }
+  100% { transform: scale(1)   translate(10px, -30px); }
+}
+
+//@keyframes drift {
+//  from { transform: rotate(0deg) scale(1); }
+//
+//  50% {
+//    transform: rotate(180deg) scale(1.6);
+//  }
+//  to { transform: rotate(360deg) scale(1); }
+//}
+
+//.waveBox {
+//  width: 100%;
+//  height: 10vh;
+//  border-radius: 5px;
+//  //box-shadow: 0 2px 30px rgba(black, .2);
+//  background: none;
+//  position: relative;
+//  top:0;
+//  left:-40%;
+//  transform: translate3d(0, 0, 0);
+//
+//  .wave {
+//    opacity: .4;
+//    position: absolute;
+//    top: 0%;
+//    left: 50%;
+//    background: #0af;
+//    width: 500px;
+//    height: 500px;
+//    margin-left: -250px;
+//    margin-top: -250px;
+//    transform-origin: 50% 48%;
+//    border-radius: 43%;
+//    animation: drift 3000ms infinite linear;
+//
+//    &.-three {
+//      animation: drift 4000ms infinite linear;
+//    }
+//
+//    &.-two {
+//      animation: drift 5000ms infinite linear;
+//      opacity: .1;
+//      background: yellow;
+//    }
+//  }
+//
+//  .title {
+//    position: absolute;
+//    left: 0;
+//    top: 0;
+//    width: 100%;
+//    z-index: 1;
+//    line-height: 300px;
+//    text-align: center;
+//    transform: translate3d(0, 0, 0);
+//    color: white;
+//    text-transform: uppercase;
+//    font-family: 'Playfair Display', serif;
+//    letter-spacing: .4em;
+//    font-size: 24px;
+//    text-shadow: 0 1px 0 rgba(black, .1);
+//    text-indent: .3em;
+//  }
+//
+//}
+
 .global-header {
   position: fixed;
   left:0;
@@ -5,18 +90,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 90px;
+  height: 70px;
   z-index: 999;
-  background: #fff;
-  padding-top: 20px;
+  //background: rgba(255,255,255,.7);
+  //box-shadow: 0 0 7px rgba(0,0,0, .1);
+  background: none;
   top: 0;
-
-  .empty {
-    flex: 1;
-  }
+  padding: 0 var(--spacing-6);
 
   .logo-cover {
-    flex: 8;
     display: flex;
     justify-content: center;
 
@@ -29,12 +111,12 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transform: scale(1);
       }
     }
   }
 
   .menu-icon {
-    flex: 1;
     transform: scale(.5);
     margin-left: -21px;
 
@@ -175,7 +257,7 @@ $index-item-max-width: 300px;
 $index-item-max-height: 170px;
 main {
   position: relative;
-  padding-top: 15%;
+  padding-top: 0%;
 
   .all-posts {
     list-style: none;
@@ -228,14 +310,12 @@ main {
 
           }
         }
-
       }
-
-
     }
 
     img {
       max-width: 100%;
+      max-height: 550px;
       object-fit: cover;
     }
   }
