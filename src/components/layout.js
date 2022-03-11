@@ -97,7 +97,7 @@ const Layout = ({location, title, categories, thisCategory, children, tableOfCon
         <>
             <div className={(isAllPosts ? "global-posts global-container" : "global-container") }>
                 <aside className="global-left">
-                    <Category categories={categories} thisCategory={thisCategory}/>
+                    {isAllPosts ? "" : <Category categories={categories} thisCategory={thisCategory}/>}
                 </aside>
                 <div className="global-center">
                     <div className="global-wrapper" data-is-root-path={isRootPath}>

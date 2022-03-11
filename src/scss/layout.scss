@@ -105,6 +105,28 @@ input[name="menu-check"] {
   }
 }
 
+.global-posts {
+  .global-center {
+    flex: 7.6;
+
+    .global-wrapper {
+      max-width: 100%;
+      main {
+        width: 100%;
+        position: relative;
+
+        .all-posts {
+
+        }
+      }
+    }
+  }
+  .global-left,
+  .global-right {
+    flex: 1.2;
+  }
+}
+
 .menu-main {
   width: 25vw;
   height: 100%;
@@ -160,7 +182,6 @@ main {
     display: flex;
 
     .post-item {
-      max-width: $index-item-max-width;
       box-sizing: border-box;
 
       div {
@@ -215,7 +236,6 @@ main {
 
     img {
       max-width: 100%;
-      height: $index-item-max-height;
       object-fit: cover;
     }
   }
