@@ -49,9 +49,7 @@ const Category = ({categories, thisCategory}) => {
                 subTarget.totalCount += 1;
             }
 
-            if(subTarget.fieldValue !== mainTarget.fieldValue) {
-                mainTarget.totalCount += 1;
-            }
+            mainTarget.totalCount += 1;
 
             // subTarget을 해당 카테고리의 서브 카테고리 값으로 변경
             subTarget = subTarget.subCategory[subTargetIdx];
