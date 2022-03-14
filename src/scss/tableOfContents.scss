@@ -1,3 +1,5 @@
+@import "src/variable";
+
 .blog-post-container {
   display: flex;
   flex-direction: row;
@@ -36,23 +38,30 @@
 .table-of-content {
   top:0;
   left:0;
-  padding-top: 0px;
   flex-grow: 0;
   max-width: calc((100% / 3) + 150px);
   flex-basis: calc(100% / 3);
   max-height: calc(100vh - 100px);
   position: sticky;
   overflow: auto;
-  * {
-    text-decoration: none;
+
+  &:before {
+    content: "";
+    width: $spacing-1;
+    height: 100%;
+    position: absolute;
+    left: $spacing-1;
+
+    background: $basicColor;
   }
 
   ul, li {
     list-style: none;
     margin: 0;
   }
+
   ul {
-    margin: 0 0 0 var(--spacing-6);
+    margin: 0 0 0 $spacing-6;
   }
 
   p {
@@ -60,7 +69,12 @@
   }
 
   a {
-    font-size: var(--fontSize-0_5);
+    font-size: $fontSize-0_5;
     letter-spacing: -0.2px;
+    color: #888;
+
+    &:hover {
+      color: $basicColor;
+    }
   }
 }
