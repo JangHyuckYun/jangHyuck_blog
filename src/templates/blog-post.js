@@ -4,6 +4,7 @@ import {Link, graphql} from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import "../scss/blog-post.scss"
 
 import TableOfContents from "../components/tableOfContents";
 import "../scss/tableOfContents.scss";
@@ -13,7 +14,7 @@ const BlogPostTemplate = ({data, location}) => {
     const siteTitle = data.site.siteMetadata?.title || `Title`;
     const {previous, next, categories} = data;
     const thisCategory = data.markdownRemark.frontmatter.category;
-
+    const titleSrc = post.frontmatter.featuredImage?.childImageSharp?.gatsbyImageData.images.fallback.src;
     console.log("post",post);
 
     return (
@@ -34,14 +35,16 @@ const BlogPostTemplate = ({data, location}) => {
                             <h1 itemProp="headline">{post.frontmatter.title}</h1>
                             <p>{post.frontmatter.date}</p>
                         </header>
+                        {titleSrc ? (
+                            <div className={"titleImage"}>
+                                <img src={titleSrc} alt=""/>
+                            </div>
+                        ) : ""}
                         <section
                             dangerouslySetInnerHTML={{__html: post.html}}
                             itemProp="articleBody"
                         />
                         <hr/>
-                        <footer>
-                            <Bio/>
-                        </footer>
                     </article>
                     <nav className="blog-post-nav">
                         <ul

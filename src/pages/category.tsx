@@ -13,7 +13,7 @@ const Category: React.FC<PageProps<CategoryQuery, Frontmatter>> = ({
     pageContext,
 }) => {
     console.log(data.allMarkdownRemark.edges);
-    const {title} = data.site.siteMetadata;
+    const { title } = data.site?.siteMetadata;
     const {category} = pageContext // gatsby-node.js의 createPage에서 넣어준 카테고리 이름.
     const {edges, totalCount} = data.allMarkdownRemark
     const tagHeader = `${totalCount} post${totalCount === 1 ? "" : "s"
