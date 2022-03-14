@@ -1,4 +1,5 @@
 import React from "react"
+import "./../scss/tableOfContents.scss"
 
 const TableOfContents = ({ content }) => {
     return (
