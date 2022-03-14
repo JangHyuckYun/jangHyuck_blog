@@ -1,3 +1,5 @@
+@import "src/variable";
+
 .blob {
   position: absolute;
   top: 0;
@@ -96,7 +98,7 @@
   //box-shadow: 0 0 7px rgba(0,0,0, .1);
   background: none;
   top: 0;
-  padding: 0 var(--spacing-6);
+  padding: 0 $spacing-6;
 
   .logo-cover {
     display: flex;
@@ -110,7 +112,7 @@
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         transform: scale(1);
       }
     }
@@ -150,7 +152,7 @@
 
   @media screen and (max-width: 1200px) {
     & {
-      width: var(--maxWidth-4xl);
+      width: $maxWidth-4xl;
       margin: 0 auto 20px auto;
     }
   }
@@ -362,7 +364,7 @@ footer {
   border-top: 1px solid #d1dce5;
 
   .footer-container {
-    width: var(--maxWidth-6xl);
+    width: $maxWidth-6xl;
     margin:0 auto;
 
     .icons {
