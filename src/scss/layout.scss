@@ -327,7 +327,8 @@ main {
               list-style: none;
               flex-wrap: wrap;
               .tag {
-                margin: 0 5px 0 0;
+                text-align: center;
+                margin: 5px 5px 0 0;
                 font-size: 12px;
                 background: #828bde;
                 border-radius: 25px;
@@ -353,8 +354,13 @@ main {
 }
 
 footer {
-  .utterances {
-    margin: 0;
+  .comments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .utterances {
+      margin: 0;
+    }
   }
 }
 
