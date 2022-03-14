@@ -1,23 +1,21 @@
 import React from "react";
 import {Link, graphql} from "gatsby";
-
-import {useMemo} from "react";
 import Bio from "../components/bio";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-import { StaticImage } from "gatsby-plugin-image"
 import PostItem from "../templates/postItem";
 import Masonry from "react-masonry-css";
 
 const BlogIndex = ({data, location}) => {
     const siteTitle = data.site.siteMetadata?.title || `Title`;
     const posts = data.allMarkdownRemark.nodes;
-    const {categories} = data;
+    let {categories, tagsGroup} = data;
+    tagsGroup = (tagsGroup?.group || []).map(({fieldValue}) => fieldValue);
 
     posts.forEach(({frontmatter}) => {
         console.log(frontmatter.featuredImage?.childImageSharp?.gatsbyImageData.src);
 
-        if(frontmatter.featuredImage !== null) {
+        if (frontmatter.featuredImage !== null) {
             // console.log(frontmatter.featuredImage?.childImageSharp.fluid.src);
         }
     })
@@ -51,7 +49,7 @@ const BlogIndex = ({data, location}) => {
                 className="all-posts"
                 columnClassName="post-item"
             >
-                {posts.map(post => <PostItem post={post} />  )}
+                {posts.map(post => <PostItem post={post}/>)}
             </Masonry>
             {/*<ol style={{listStyle: `none`}} className={"all-posts "}>*/}
 
@@ -63,34 +61,42 @@ const BlogIndex = ({data, location}) => {
 export default BlogIndex
 
 export const pageQuery = graphql`{
-  site {
-    siteMetadata {
-      title
-    }
-  }
-  categories: allMarkdownRemark(limit: 2000) {
-    group(field: frontmatter___category) {
-      fieldValue
-      totalCount
-    }
-  }
-  allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
-    nodes {
-      excerpt
-      fields {
-        slug
-      }
-      frontmatter {
-        date(formatString: "YYYY.MM.DD  ")
-        title
-        description
-        featuredImage {
-          childImageSharp {
-            gatsbyImageData(width: 800, layout: CONSTRAINED)
-          }
+    site {
+        siteMetadata {
+            title
         }
-      }
     }
-  }
+    categories: allMarkdownRemark(limit: 2000) {
+        group(field: frontmatter___category) {
+            fieldValue
+            totalCount
+        }
+    }
+
+    tagsGroup: allMarkdownRemark(limit: 2000) {
+        group(field: frontmatter___tags) {
+            fieldValue
+        }
+    }
+    
+    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+        nodes {
+            excerpt
+            fields {
+                slug
+            }
+            frontmatter {
+                date(formatString: "YYYY.MM.DD  ")
+                title
+                tags
+                description
+                featuredImage {
+                    childImageSharp {
+                        gatsbyImageData(width: 800, layout: CONSTRAINED)
+                    }
+                }
+            }
+        }
+    }
 }
 `
