@@ -12,14 +12,6 @@ const BlogIndex = ({data, location}) => {
     let {categories, tagsGroup} = data;
     tagsGroup = (tagsGroup?.group || []).map(({fieldValue}) => fieldValue);
 
-    posts.forEach(({frontmatter}) => {
-        console.log(frontmatter.featuredImage?.childImageSharp?.gatsbyImageData.src);
-
-        if (frontmatter.featuredImage !== null) {
-            // console.log(frontmatter.featuredImage?.childImageSharp.fluid.src);
-        }
-    })
-
     if (posts.length === 0) {
         return (
             <Layout location={location} title={siteTitle} categories={[]} thisCategory={""}>
@@ -51,9 +43,6 @@ const BlogIndex = ({data, location}) => {
             >
                 {posts.map(post => <PostItem post={post}/>)}
             </Masonry>
-            {/*<ol style={{listStyle: `none`}} className={"all-posts "}>*/}
-
-            {/*</ol>*/}
         </Layout>
     )
 }
