@@ -5,7 +5,7 @@ const PostItem = ({ post }) => {
 
     const title = post.frontmatter.title || post.fields.slug
     const titleSrc = post.frontmatter.featuredImage?.childImageSharp?.gatsbyImageData.images.fallback.src;
-    const tags = post.frontmatter?.tags;
+    const tags = post.frontmatter?.tags || [];
 
     return (
         <div key={title}>
