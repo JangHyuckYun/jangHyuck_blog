@@ -94,7 +94,6 @@
 //    text-shadow: 0 1px 0 rgba(black, .1);
 //    text-indent: .3em;
 //  }
-//
 //}
 
 .global-header {
@@ -262,16 +261,9 @@ input[name="menu-check"] {
 
       &:first-child {
         border-top: 1px solid #cccccc;
-
-        a, span {
-          border-bottom: 1px solid #cccccc;
-        }
       }
 
 
-      &:focus {
-        background: red;
-      }
 
       &.testActive {
         & > ul.subCategory {
