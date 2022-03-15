@@ -17,21 +17,8 @@
 
   .content {
     flex-grow: 0;
-    max-width: calc((100% * 2 / 3) + 14%);
-    flex-basis: calc((100% * 2 / 3) + 14%);
-  }
-
-  @media screen and (max-width: 1200px) {
-    & {
-      display: block;
-      margin: 0 5rem;
-    }
-    .content {
-      max-width: 100%;
-    }
-    .table-of-content {
-      display: none;
-    }
+    max-width: 100%;
+    flex-basis: 100%;
   }
 }
 

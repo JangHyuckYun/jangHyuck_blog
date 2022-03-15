@@ -51,6 +51,8 @@ const Layout = ({location, title, categories, thisCategory, children, tableOfCon
                         <main>{children}</main>
                         <footer>
                             {isNotIncludePathComment ? "" : <div className="comments">
+                                <p>Comments</p>
+                                <hr/>
                                 <Utterances repo='JangHyuckYun/jangHyuck_blog' theme='github-light'/>
                             </div>}
                         </footer>

@@ -12,12 +12,24 @@
 }
 
 @keyframes move {
-  0%   { transform: scale(1)   translate(10px, -30px); }
-  38%  { transform: scale(0.8, 1) translate(80vw, 30vh) rotate(160deg); }
-  40%  { transform: scale(0.8, 1) translate(80vw, 30vh) rotate(160deg); }
-  78%  { transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg); }
-  80%  { transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg); }
-  100% { transform: scale(1)   translate(10px, -30px); }
+  0% {
+    transform: scale(1) translate(10px, -30px);
+  }
+  38% {
+    transform: scale(0.8, 1) translate(80vw, 30vh) rotate(160deg);
+  }
+  40% {
+    transform: scale(0.8, 1) translate(80vw, 30vh) rotate(160deg);
+  }
+  78% {
+    transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg);
+  }
+  80% {
+    transform: scale(1.3) translate(0vw, 50vh) rotate(-20deg);
+  }
+  100% {
+    transform: scale(1) translate(10px, -30px);
+  }
 }
 
 //@keyframes drift {
@@ -87,13 +99,13 @@
 
 .global-header {
   position: fixed;
-  left:0;
-  width:100%;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  z-index: 999;
+  z-index: 1000;
   //background: rgba(255,255,255,.7);
   //box-shadow: 0 0 7px rgba(0,0,0, .1);
   background: none;
@@ -195,6 +207,7 @@ input[name="menu-check"] {
 
     .global-wrapper {
       max-width: 100%;
+
       main {
         width: 100%;
         position: relative;
@@ -205,6 +218,7 @@ input[name="menu-check"] {
       }
     }
   }
+
   .global-left,
   .global-right {
     flex: 1.2;
@@ -228,14 +242,69 @@ input[name="menu-check"] {
     background: none;
     //opacity: .5;
     position: fixed;
-    left:0;
+    left: 0;
     top: 0;
     visibility: hidden;
     cursor: pointer;
   }
 
   .categories {
-    list-style: none;
+    margin: 20% 6% 0 6%;
+    text-align: center;
+
+    li {
+      list-style: none;
+      width: 100%;
+      min-height: 40px;
+      line-height: 40px;
+
+      border-bottom: 1px solid #cccccc;
+
+      &:first-child {
+        border-top: 1px solid #cccccc;
+
+        a, span {
+          border-bottom: 1px solid #cccccc;
+        }
+      }
+
+
+      &:focus {
+        background: red;
+      }
+
+      &.testActive {
+        & > ul.subCategory {
+          visibility: visible;
+          max-height: 500px;
+        }
+      }
+
+      a, span {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        display: block;
+        border-bottom: 1px solid #cccccc;
+      }
+
+      & > ul.subCategory {
+        margin: 0 0 0 2rem;
+        max-height: 0;
+        overflow: hidden;
+
+        /* Set our transitions up. */
+        transition: all 0.4s;
+
+        & > li:first-child {
+          border: none;
+        }
+
+        & > li:last-child {
+          border: none;
+        }
+      }
+    }
 
     li.active {
       padding-left: 10px;
@@ -274,6 +343,7 @@ main {
 
         .post-list-item {
           transition: box-shadow .3s ease-in-out, transform .3s ease-in-out;
+
           &:hover {
             transform: translateY(-10px);
           }
@@ -307,8 +377,8 @@ main {
           section {
             background: #fff;
             border-radius: 5px;
-            box-shadow: 0 7px 6px rgba(0,0,0, .1);
-            padding:10px;
+            box-shadow: 0 7px 6px rgba(0, 0, 0, .1);
+            padding: 10px;
 
             transform: translateY(-7px);
 
@@ -317,7 +387,7 @@ main {
             }
 
             h5 {
-              margin:5px 0 2px 0;
+              margin: 5px 0 2px 0;
             }
 
             .tags {
@@ -326,16 +396,17 @@ main {
               margin: 15px 0 0 0;
               list-style: none;
               flex-wrap: wrap;
+
               .tag {
                 text-align: center;
                 margin: 5px 5px 0 0;
                 font-size: 12px;
                 background: #828bde;
                 border-radius: 25px;
-                padding:2.5px 8px;
+                padding: 2.5px 8px;
 
                 span {
-                  color:white;
+                  color: white;
                 }
               }
             }
@@ -355,11 +426,18 @@ main {
 
 footer {
   .comments {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-width: 100%;
+
     .utterances {
+      max-width: 100%;
       margin: 0;
+    }
+
+    & > div {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
@@ -371,13 +449,13 @@ footer {
 
   .footer-container {
     width: $maxWidth-6xl;
-    margin:0 auto;
+    margin: 0 auto;
 
     .icons {
       a {
-        color:#888;
+        color: #888;
         font-size: 26px;
-        margin:0 3px;
+        margin: 0 3px;
       }
     }
   }

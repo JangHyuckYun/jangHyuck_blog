@@ -8,6 +8,7 @@ import "../scss/blog-post.scss"
 
 import TableOfContents from "../components/tableOfContents";
 import "../scss/tableOfContents.scss";
+import { getImageUrl } from "./../components/util";
 
 const BlogPostTemplate = ({data, location}) => {
     const post = data.markdownRemark;
@@ -15,7 +16,6 @@ const BlogPostTemplate = ({data, location}) => {
     const {previous, next, categories} = data;
     const thisCategory = data.markdownRemark.frontmatter.category;
     const titleSrc = post.frontmatter.featuredImage?.childImageSharp?.gatsbyImageData.images.fallback.src;
-    console.log("post",post);
 
     return (
         <Layout location={location} title={siteTitle} categories={categories?.group} thisCategory={thisCategory || ""}
@@ -59,19 +59,22 @@ const BlogPostTemplate = ({data, location}) => {
                             <li>
                                 {previous && (
                                     <Link to={previous.fields.slug} rel="prev">
-                                        ← {previous.frontmatter.title}
+                                        <img src={getImageUrl(previous.frontmatter)} alt=""/>
+                                        <p>← {previous.frontmatter.title}</p>
                                     </Link>
                                 )}
                             </li>
                             <li>
                                 {next && (
                                     <Link to={next.fields.slug} rel="next">
-                                        {next.frontmatter.title} →
+                                        <img src={getImageUrl(next.frontmatter)} alt=""/>
+                                        <p>{next.frontmatter.title} →</p>
                                     </Link>
                                 )}
                             </li>
                         </ul>
                     </nav>
+                    <hr/>
                 </div>
             </div>
         </Layout>
@@ -81,50 +84,60 @@ const BlogPostTemplate = ({data, location}) => {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`query BlogPostBySlug($id: String!, $previousPostId: String, $nextPostId: String) {
-  site {
-    siteMetadata {
-      title
-    }
-  }
-  markdownRemark(id: {eq: $id}) {
-    id
-    excerpt(pruneLength: 160)
-    html
-    tableOfContents
-    frontmatter {
-      title
-      date(formatString: "YYYY년 MM월 DD일")
-      description
-      category
-      featuredImage {
-        childImageSharp {
-          gatsbyImageData(width: 800, layout: CONSTRAINED)
+    site {
+        siteMetadata {
+            title
         }
-      }
     }
-  }
-  previous: markdownRemark(id: {eq: $previousPostId}) {
-    fields {
-      slug
+    markdownRemark(id: {eq: $id}) {
+        id
+        excerpt(pruneLength: 160)
+        html
+        tableOfContents
+        frontmatter {
+            title
+            date(formatString: "YYYY년 MM월 DD일")
+            description
+            category
+            featuredImage {
+                childImageSharp {
+                    gatsbyImageData(width: 800, layout: CONSTRAINED)
+                }
+            }
+        }
     }
-    frontmatter {
-      title
+    previous: markdownRemark(id: {eq: $previousPostId}) {
+        fields {
+            slug
+        }
+        frontmatter {
+            title
+            featuredImage {
+                childImageSharp {
+                    gatsbyImageData(width: 800, layout: CONSTRAINED)
+                }
+            }
+        }
     }
-  }
-  next: markdownRemark(id: {eq: $nextPostId}) {
-    fields {
-      slug
+    next: markdownRemark(id: {eq: $nextPostId}) {
+        fields {
+            slug
+        }
+        frontmatter {
+            title
+            featuredImage {
+                childImageSharp {
+                    gatsbyImageData(width: 800, layout: CONSTRAINED)
+                }
+            }
+        }
     }
-    frontmatter {
-      title
+    categories: allMarkdownRemark(limit: 2000) {
+        group(field: frontmatter___category) {
+            fieldValue
+            totalCount
+        }
     }
-  }
-  categories: allMarkdownRemark(limit: 2000) {
-    group(field: frontmatter___category) {
-      fieldValue
-      totalCount
-    }
-  }
 }
 `;
 /*

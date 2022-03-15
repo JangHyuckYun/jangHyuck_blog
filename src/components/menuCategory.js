@@ -1,6 +1,7 @@
 import {Link} from "gatsby";
 import React from "react";
 import {kebabCase} from "./util";
+import { GoTriangleDown } from "react-icons/go";
 
 const MenuCategory = ({categories, thisCategory}) => {
     if (categories === undefined) {
@@ -58,14 +59,29 @@ const MenuCategory = ({categories, thisCategory}) => {
         return acc;
     }, []);
 
+    const toggleSubCategory = e => {
+        e.stopPropagation()
+        const {target} = e;
+
+        if(target.tagName === "SPAN") {
+            target.parentNode.classList.toggle("testActive");
+        } else {
+            target.classList.toggle("testActive");
+        }
+    }
+
     const subCategoryTag = (subCategoryArr = [], depth = 1) => {
         if (subCategoryArr.length === 0) return "";
 
         return (
             <ul className="subCategory" data-depth={depth}>
                 {subCategoryArr.map(({fieldValue, totalCount, subCategory, categoryPath}, cIdx) =>
-                    (<li key={fieldValue}>
-                        <Link to={"/category/" + kebabCase(categoryPath)}>{fieldValue} ({totalCount})</Link>
+                    (<li
+                        key={fieldValue}
+                        className={fieldValue === thisCategory ? "active" : ""}
+                        onClick={(e) => toggleSubCategory(e)}>
+                        {subCategory.length !== 0 ? <span>{fieldValue} ({totalCount}) <GoTriangleDown /></span> :
+                            <Link to={"/category/" + kebabCase(categoryPath)}>{fieldValue} ({totalCount})</Link>}
                         {subCategoryTag(subCategory, depth + 1)}
                     </li>))}
             </ul>);
@@ -75,8 +91,10 @@ const MenuCategory = ({categories, thisCategory}) => {
         <ul className="categories">
             {refineCategoies.map(({fieldValue, totalCount, subCategory}) => {
                 return (
-                    <li key={fieldValue} className={fieldValue === thisCategory ? "active" : ""}>
-                        <Link to={`/category/${kebabCase(fieldValue)}`}>{fieldValue}({totalCount})</Link>
+                    <li key={fieldValue} className={fieldValue === thisCategory ? "active" : ""}
+                        onClick={(e) => toggleSubCategory(e)}>
+                        {subCategory.length !== 0 ? <span>{fieldValue} ({totalCount}) <GoTriangleDown /></span> :
+                            <Link to={`/category/${kebabCase(fieldValue)}`}>{fieldValue}({totalCount})</Link>}
                         {subCategoryTag(subCategory)}
                     </li>
                 );

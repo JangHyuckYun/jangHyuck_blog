@@ -41,26 +41,19 @@ hr {
 
 /* Heading */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: $font-heading;
-  margin-top: $spacing-12;
-  margin-bottom: $spacing-6;
-  line-height: $lineHeight-tight;
-  letter-spacing: -0.025em;
-}
+@for $i from 1 to 6 {
+  h#{$i} {
+    font-family: $font-heading;
+    margin-top: $spacing-12;
+    margin-bottom: $spacing-6;
+    line-height: $lineHeight-tight;
+    letter-spacing: -0.025em;
 
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: $fontWeight-bold;
-  color: $color-heading;
+    @if $i > 1 {
+      font-weight: $fontWeight-bold;
+      color: $color-heading;
+    }
+  }
 }
 
 h1 {
@@ -312,6 +305,45 @@ a {
 }
 
 /* Media queries */
+
+@media screen and (max-width: 1200px) {
+  .blog-post-container {
+    display: block;
+    margin: 0 1rem;
+  }
+  .content {
+    max-width: 100%;
+  }
+
+  .global-wrapper {
+    max-width: $maxWidth-9xl;
+  }
+
+  .global-left,
+  .global-right {
+    display: none;
+  }
+
+  .global-header {
+    min-width: 100%;
+    width: $maxWidth-9xl;
+    max-width: $maxWidth-9xl;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .global-wrapper {
+    max-width: $maxWidth-full;
+    padding: 2.5rem 0;
+
+
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .global-wrapper {
+  }
+}
 
 @media (max-width: 42rem) {
   blockquote {
