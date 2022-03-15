@@ -1,9 +1,9 @@
 ---
-title: CodeClean(코드클린) 책 읽고 느낀점, 배운점 
+title: CleanCode(클린코드) 책 읽고 느낀점, 배운점 
 date: "2022-03-15"
-description: "CodeClean 관련 책을 읽으면서 어떤것들을 배웠는지 적었습니다."
+description: "CleanCode 관련 책을 읽으면서 어떤것들을 배웠는지 적었습니다."
 category: "ReadingBook"
-tags: [ "2022" ,"Book", "Programming" ]
+tags: [ "2022" ,"Book", "Clean Code", "Programming" ]
 featuredImage: ./images/codeClean.jpg
 ---
 
