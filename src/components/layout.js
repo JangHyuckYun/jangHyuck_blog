@@ -16,11 +16,6 @@ const Layout = ({location, title, categories, thisCategory, children, tableOfCon
 
     return (
         <>
-            {isAllPosts ? (
-                <div className={"blob"}>
-
-                </div>
-            ) : ""}
             <div className={(isAllPosts ? "global-posts global-container" : "global-container")}>
                 <aside className="global-left">
                 </aside>
@@ -51,6 +46,8 @@ const Layout = ({location, title, categories, thisCategory, children, tableOfCon
                         <main>{children}</main>
                         <footer>
                             {isNotIncludePathComment ? "" : <div className="comments">
+                                <p>Comments</p>
+                                <hr/>
                                 <Utterances repo='JangHyuckYun/jangHyuck_blog' theme='github-light'/>
                             </div>}
                         </footer>
