@@ -332,11 +332,14 @@ a {
 }
 
 @media screen and (max-width: 830px) {
-  .global-wrapper {
-    max-width: $maxWidth-full;
-    padding: 2.5rem 0;
+  .global-center {
+    max-width: 95vw;
 
-
+    .global-wrapper {
+      overflow-x: hidden;
+      max-width: $maxWidth-full;
+      padding: 2.5rem 0;
+    }
   }
 }
 
