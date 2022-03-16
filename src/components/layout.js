@@ -16,11 +16,6 @@ const Layout = ({location, title, categories, thisCategory, children, tableOfCon
 
     return (
         <>
-            {isAllPosts ? (
-                <div className={"blob"}>
-
-                </div>
-            ) : ""}
             <div className={(isAllPosts ? "global-posts global-container" : "global-container")}>
                 <aside className="global-left">
                 </aside>
